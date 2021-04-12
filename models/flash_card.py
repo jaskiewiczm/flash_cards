@@ -1,6 +1,8 @@
+from sqlalchemy import Column, String
 
+from database.database import database_instance
 
-class FlashCard(Model):
+class FlashCard(database_instance.base):
     __tablename__ = 'flash_cards'
 
     id = Column('user_id', Integer, primary_key=True)
