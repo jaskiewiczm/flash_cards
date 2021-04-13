@@ -13,7 +13,8 @@ class Database():
         host = config_instance.database_config['host']
         port = config_instance.database_config['port']
 
-        return f'mysql+mysqldb://{user}:{password}@{host}[:{port}]/{database}'
-
+        conn_string = f'mysql:///?User={user}&;Password={password}&Database={database}&Server={host}&Port={port}'
+        print(conn_string)
+        return conn_string
 
 database_instance = Database()

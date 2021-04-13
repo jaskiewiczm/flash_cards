@@ -26,8 +26,6 @@ target_metadata = None
 
 import sqlalchemy
 from database.database import database_instance
-import pdb; pdb.set_trace()
-sqlalchemy.url = database_instance.connection_string()
 
 
 def run_migrations_offline():
@@ -61,6 +59,7 @@ def run_migrations_online():
     and associate a connection with the context.
 
     """
+    config.set_main_option('url', database_instance.connection_string())
     connectable = engine_from_config(
         config.get_section(config.config_ini_section),
         prefix="sqlalchemy.",
