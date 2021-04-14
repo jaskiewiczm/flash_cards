@@ -1,9 +1,11 @@
 from config.config import config_instance
 
+import sqlalchemy as sa
+from sqlalchemy.ext.declarative import declarative_base
 
 class Database():
     def init(self):
-        self.engine = create_engine(self.connection_string())
+        self.engine = sa.create_engine(self.connection_string())
         self.base = declarative_base()
 
     def connection_string(self):
@@ -18,3 +20,7 @@ class Database():
         return conn_string
 
 database_instance = Database()
+database_instance.init()
+
+from models import *
+

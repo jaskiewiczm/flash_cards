@@ -1,6 +1,7 @@
-from sqlalchemy import Column, String
+from sqlalchemy import Column, String, Integer
 
 from database.database import database_instance
+
 
 class FlashCard(database_instance.base):
     __tablename__ = 'flash_cards'

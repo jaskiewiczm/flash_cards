@@ -1,0 +1,1 @@
+from models.flash_card import FlashCard
