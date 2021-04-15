@@ -1,35 +1,55 @@
-const path = require('path')
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
+
+const port = process.env.PORT || 3000;
 
 module.exports = {
-  entry: path.resolve(__dirname, 'client', 'index.js'),
+  mode: 'development',
+  entry: './client/index.js',
   output: {
-    path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: 'main.js',
   },
-  devServer: {
-    contentBase: path.resolve(__dirname, 'public'),
-    open: true,
-    clientLogLevel: 'silent',
-    port: 9000
-  },
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
-        test: /\.(jsx|js)$/,
-        include: path.resolve(__dirname, 'client'),
+        test: /\.(js)$/,
         exclude: /node_modules/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              ['@babel/preset-env', {
-                "targets": "defaults"
-              }],
-              '@babel/preset-react'
-            ]
+        use: ['babel-loader']
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              sourceMap: true
+            }
           }
-        }]
+        ]
       }
     ]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'public/index.html'
+    }),
+    new Dotenv()
+  ],
+  devServer: {
+    host: 'localhost',
+    port: port,
+    historyApiFallback: true,
+    open: true
+  },
+  resolve: {
+    fallback: {
+
+    }
   }
-}
+};

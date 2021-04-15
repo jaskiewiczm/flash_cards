@@ -3,5 +3,5 @@ import ReactDOM from 'react-dom'
 
 ReactDOM.render(
   React.createElement('div', null, `Hello React`),
-  document.getElementById('app')
+  document.getElementById('root')
 )
